@@ -1,5 +1,5 @@
-// import Box from "@mui/material/Box/Box";
-import {Box, Text} from '../utils/themeUtils';
+
+import { Box, Text } from "@/css";
 import React from "react";
 // import {Text} from "react-native";
 

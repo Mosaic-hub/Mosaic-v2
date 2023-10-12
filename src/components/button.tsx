@@ -1,14 +1,15 @@
 
+import { Box } from "@/css";
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 
 const Button = () => {
     return(
-        <View>
+        <Box bg= "blu200" p= "4" borderRadius="rounded-3xl">
             <Text>
                 LogIn
             </Text>
-        </View>
+        </Box>
     )
 }
 
