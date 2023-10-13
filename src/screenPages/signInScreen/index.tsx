@@ -1,21 +1,21 @@
-import { Box, Button} from "@mui/material";
-import {Text} from "react-native";
+import {Button} from "react-native";
 import React from "react";
 import { useNavigation } from "@react-navigation/native";
+import { Box, Text } from "@/css";
+import { AuthScreenNaviagtionType } from "@/navigations/typesOfPages";
+
 
 const SignInScreen = () => {
-    const navigation = useNavigation ()
+    const navigation = useNavigation<AuthScreenNaviagtionType<"SignIn">> ()
     const navigateToSignUpScreen = () => {
-        navigation.navigate("AuthStack", {
-            screen: "SignUp"
-        })
+        navigation.navigate("SignUp")
     }
 
 
     return (
         <Box>
             <Text> Sign In Screen </Text>
-            <Button variant="outlined">Outlined</Button>
+            <Button title="Navigate to sign up" onPress={navigateToSignUpScreen} />
 
         </Box>
 
