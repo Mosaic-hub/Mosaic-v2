@@ -1,10 +1,6 @@
 import React, { useState } from "react";
 import { View, Text, Button, StyleSheet, ScrollView, TouchableOpacity } from "react-native";
 import { useNavigation } from "@react-navigation/native";
-<<<<<<< Updated upstream
-import { AuthScreenNaviagtionType } from "@/navigations/typesOfPages";
-import { Box } from "@/css";
-=======
 import { AuthScreenNavigationType } from "@/navigations/typesOfPages";
 import SafeAreaWrapper from "@/components/shared/safe-area-wrapper";
 import { TextInput, HelperText } from "react-native-paper";
@@ -64,7 +60,6 @@ const usStates = [
   "Wisconsin",
   "Wyoming",
 ];
->>>>>>> Stashed changes
 
 const BusinSignUpScreen = () => {
   const navigation = useNavigation<AuthScreenNavigationType<"BusinSignUp">>();
@@ -85,14 +80,6 @@ const BusinSignUpScreen = () => {
   const [birthDate, setBirthDate] = useState(new Date());
   const [isDatePickerVisible, setDatePickerVisible] = useState(false);
 
-<<<<<<< Updated upstream
-    return (
-        <Box>
-            <Text> Business Sign Up Screen </Text>
-            <Button title="Navigate to Business sign In" onPress={navigateToBusinSignInScreen} />
-
-        </Box>
-=======
   const toggleShowPassword = () => {
     setShowPassword(!showPassword);
   }
@@ -102,7 +89,6 @@ const BusinSignUpScreen = () => {
     setEmailValid(isValid);
     setEmail(text);
   }
->>>>>>> Stashed changes
 
   const handleDatePicked = (date: Date) => {
     setBirthDate(date);

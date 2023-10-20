@@ -1,14 +1,9 @@
 import React, { useState } from "react";
 import { View, Text, Button, StyleSheet } from "react-native";
 import { useNavigation } from "@react-navigation/native";
-<<<<<<< Updated upstream
-import { AuthScreenNaviagtionType } from "@/navigations/typesOfPages";
-import { Box } from "@/css";
-=======
 import { AuthScreenNavigationType } from "@/navigations/typesOfPages";
 import SafeAreaWrapper from "@/components/shared/safe-area-wrapper";
 import { Checkbox, TextInput, Switch, HelperText } from "react-native-paper";
->>>>>>> Stashed changes
 
 const BusinSignInScreen = () => {
   const navigation = useNavigation<AuthScreenNavigationType<"BusinSignIn">>();
@@ -19,16 +14,6 @@ const BusinSignInScreen = () => {
   const [rememberMe, setRememberMe] = useState(false);
   const [isEmailValid, setEmailValid] = useState(true);
 
-<<<<<<< Updated upstream
-    return (
-        <Box>
-            <Text> Business Sign In Screen </Text>
-            <Button title="Navigate to Business sign up" onPress={navigateToBusinSignUpScreen} />
-
-        </Box>
-
-    )
-=======
   const toggleShowPassword = () => {
     setShowPassword(!showPassword);
   }
@@ -97,7 +82,6 @@ const BusinSignInScreen = () => {
       </View>
     </SafeAreaWrapper>
   );
->>>>>>> Stashed changes
 }
 
 const styles = StyleSheet.create({

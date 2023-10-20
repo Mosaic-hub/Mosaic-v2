@@ -13,22 +13,19 @@
     "@expo/webpack-config": "^18.1.3",
     "@mui/icons-material": "^5.14.13",
     "@mui/material": "^5.14.13",
-<<<<<<< Updated upstream
-=======
+
     "@react-native-async-storage/async-storage": "1.18.2",
     "@react-native-community/datetimepicker": "^7.6.1",
->>>>>>> Stashed changes
+
     "@react-navigation/bottom-tabs": "^6.5.9",
     "@react-navigation/native": "^6.1.8",
     "@react-navigation/native-stack": "^6.9.14",
     "@shopify/restyle": "^2.4.2",
     "babel-plugin-module-resolver": "^5.0.0",
-<<<<<<< Updated upstream
-    "expo": "~49.0.13",
-=======
+
     "expo": "^49.0.16",
     "expo-linear-gradient": "~12.3.0",
->>>>>>> Stashed changes
+
     "expo-status-bar": "~1.6.0",
     "react": "18.2.0",
     "react-native": "0.72.6",
@@ -40,13 +37,11 @@
     "react-native-screens": "~3.22.0",
     "react-native-vector-icons": "^10.0.0",
     "react-native-web": "~0.19.6",
-<<<<<<< Updated upstream
-    "untils": "^1.0.0"
-=======
+
     "untils": "^1.0.0",
     "zustand": "^4.4.3",
     "@expo/vector-icons": "^13.0.0"
->>>>>>> Stashed changes
+
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",
