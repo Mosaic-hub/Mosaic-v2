@@ -2,11 +2,11 @@
 import {Button, Text} from "react-native";
 import React from "react";
 import { useNavigation } from "@react-navigation/native";
-import { AuthScreenNaviagtionType } from "@/navigations/typesOfPages";
+import { AuthScreenNavigationType } from "@/navigations/typesOfPages";
 import { Box } from "@/css";
 
 const SignUpScreen = () => {
-    const navigation = useNavigation<AuthScreenNaviagtionType<"SignUp">> ()
+    const navigation = useNavigation<AuthScreenNavigationType<"SignUp">> ()
     const navigateToSignInScreen = () => {
         navigation.navigate("SignIn")
     }

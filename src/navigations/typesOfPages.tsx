@@ -41,7 +41,7 @@ declare global {
     }
 }
 
-export type AuthScreenNaviagtionType<
+export type AuthScreenNavigationType<
     RouteName extends keyof AuthStackParamList
 > = CompositeNavigationProp <
   NativeStackNavigationProp<AuthStackParamList, RouteName>,

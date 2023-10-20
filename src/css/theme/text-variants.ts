@@ -21,7 +21,7 @@ export const textVariants = {
         lineHight: 28,
     },
     // for extra large text font
-    textXLrg: {
+    textXL: {
         fontSize: 20,
         lineHight: 28,
     },
