@@ -2,14 +2,26 @@ import React from "react";
 import { View, Text, Image, StyleSheet } from "react-native";
 import { Button } from "react-native-paper";
 import { useNavigation } from "@react-navigation/native";
+<<<<<<< Updated upstream
 import { AuthScreenNavigationType } from "@/navigations/typesOfPages";
+import SafeAreaWrapper from "@/components/shared/safe-area-wrapper";
+import { LinearGradient } from "expo-linear-gradient";
+=======
+import { AuthScreenNaviagtionType } from "@/navigations/typesOfPages";
 import SafeAreaWrapper from "@/components/shared/safe-area-wrapper";
 import { LinearGradient } from "expo-linear-gradient";
 
 const logoImage = "https://res.cloudinary.com/dxmis4bog/image/upload/f_auto,q_auto/cqil9yea0xlzaxi8rsx3";
+>>>>>>> Stashed changes
+
+const logoImage = "https://res.cloudinary.com/dxmis4bog/image/upload/f_auto,q_auto/cqil9yea0xlzaxi8rsx3";
 
 const WelcomeScreen = () => {
+<<<<<<< Updated upstream
   const navigation = useNavigation<AuthScreenNavigationType<"Welcome">>();
+=======
+  const navigation = useNavigation<AuthScreenNaviagtionType<"Welcome">>();
+>>>>>>> Stashed changes
 
   const navigateToSignInScreen = () => {
     navigation.navigate("SignIn");
@@ -22,7 +34,11 @@ const WelcomeScreen = () => {
   return (
     <SafeAreaWrapper>
       <View style={styles.container}>
+<<<<<<< Updated upstream
         <LinearGradient colors={["#ffffff", "#ffeed9", "f8daff", "#ffe5c0", "#fef9ff", "#ffffff"]} style={styles.gradient}>
+=======
+      <LinearGradient colors={["#ffffff", "#ffeed9", "#f8daff", "#ffe5c0", "#fef9ff", "#ffffff"]} style={styles.gradient}>
+>>>>>>> Stashed changes
           <View style={styles.content}>
             <Text style={styles.title}>WELCOME TO</Text>
             <Image

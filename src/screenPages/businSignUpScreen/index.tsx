@@ -1,11 +1,18 @@
 import React, { useState } from "react";
 import { View, Text, Button, StyleSheet, ScrollView, TouchableOpacity } from "react-native";
 import { useNavigation } from "@react-navigation/native";
+<<<<<<< Updated upstream
 import { AuthScreenNavigationType } from "@/navigations/typesOfPages";
 import SafeAreaWrapper from "@/components/shared/safe-area-wrapper";
 import { TextInput, HelperText } from "react-native-paper";
 import RNPickerSelect from 'react-native-picker-select';
 import DateTimePicker from 'react-native-modal-datetime-picker';
+=======
+import { AuthScreenNaviagtionType } from "@/navigations/typesOfPages";
+import SafeAreaWrapper from "@/components/shared/safe-area-wrapper";
+import { TextInput, HelperText } from "react-native-paper";
+import RNPickerSelect from 'react-native-picker-select';
+>>>>>>> Stashed changes
 import { Feather } from '@expo/vector-icons';
 
 const usStates = [
@@ -62,7 +69,11 @@ const usStates = [
 ];
 
 const BusinSignUpScreen = () => {
+<<<<<<< Updated upstream
   const navigation = useNavigation<AuthScreenNavigationType<"BusinSignUp">>();
+=======
+  const navigation = useNavigation<AuthScreenNaviagtionType<"BusinSignUp">>();
+>>>>>>> Stashed changes
 
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
@@ -134,6 +145,7 @@ const BusinSignUpScreen = () => {
           onChangeText={setLastName}
           style={styles.input}
         />
+<<<<<<< Updated upstream
         <View style={styles.birthDateContainer}>
           <TextInput
             label="Month"
@@ -154,6 +166,8 @@ const BusinSignUpScreen = () => {
             onFocus={showDatePicker}
           />
         </View>
+=======
+>>>>>>> Stashed changes
         <TextInput
           label="Email"
           value={email}
@@ -225,12 +239,15 @@ const BusinSignUpScreen = () => {
         />
         <Button title="Sign Up" onPress={handleSignUp} color="#007bff" />
       </ScrollView>
+<<<<<<< Updated upstream
       <DateTimePicker
         isVisible={isDatePickerVisible}
         mode="date"
         onConfirm={handleDatePicked}
         onCancel={hideDatePicker}
       />
+=======
+>>>>>>> Stashed changes
     </SafeAreaWrapper>
   );
 }
