@@ -1,27 +1,17 @@
 import React, { useState } from "react";
 import { View, Text, Button, StyleSheet } from "react-native";
 import { useNavigation } from "@react-navigation/native";
-<<<<<<< Updated upstream
-import { Box, Text } from "@/css";
 import { AuthScreenNavigationType } from "@/navigations/typesOfPages";
-=======
-import { AuthScreenNaviagtionType } from "@/navigations/typesOfPages";
->>>>>>> Stashed changes
 import SafeAreaWrapper from "@/components/shared/safe-area-wrapper";
 import { Checkbox, TextInput, Switch, HelperText } from "react-native-paper";
 
 
 const SignInScreen = () => {
-<<<<<<< Updated upstream
     const navigation = useNavigation<AuthScreenNavigationType<"SignIn">> ()
-    const navigateToSignUpScreen = () => {
-=======
-    const navigation = useNavigation<AuthScreenNaviagtionType<"SignIn">> ()
     const navigateToDashboardScreen = () => {
         navigation.navigate("Dashboard")
     }
     const navigateToSignUp = () => {
->>>>>>> Stashed changes
         navigation.navigate("SignUp")
     }
 
@@ -31,14 +21,6 @@ const SignInScreen = () => {
   const [rememberMe, setRememberMe] = useState(false);
   const [isEmailValid, setEmailValid] = useState(true);
 
-<<<<<<< Updated upstream
-    return (
-        <Box>
-            <Text> Sign In Screen </Text>
-            <Button title="Navigate to sign up" onPress={navigateToSignUpScreen} />
-
-        </Box>
-=======
   const toggleShowPassword = () => {
     setShowPassword(!showPassword);
   }
@@ -46,7 +28,6 @@ const SignInScreen = () => {
   const toggleRememberMe = () => {
     setRememberMe(!rememberMe);
   }
->>>>>>> Stashed changes
 
   const validateEmail = (text: string) => {
     // Implement email validation logic here.

@@ -1,20 +1,12 @@
 import React, { useState } from "react";
 import { View, Text, Button, StyleSheet } from "react-native";
 import { useNavigation } from "@react-navigation/native";
-<<<<<<< Updated upstream
 import { AuthScreenNavigationType } from "@/navigations/typesOfPages";
-=======
-import { AuthScreenNaviagtionType } from "@/navigations/typesOfPages";
->>>>>>> Stashed changes
 import SafeAreaWrapper from "@/components/shared/safe-area-wrapper";
 import { Checkbox, TextInput, Switch, HelperText } from "react-native-paper";
 
 const BusinSignInScreen = () => {
-<<<<<<< Updated upstream
   const navigation = useNavigation<AuthScreenNavigationType<"BusinSignIn">>();
-=======
-  const navigation = useNavigation<AuthScreenNaviagtionType<"BusinSignIn">>();
->>>>>>> Stashed changes
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");

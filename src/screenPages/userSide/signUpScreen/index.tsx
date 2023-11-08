@@ -4,25 +4,7 @@ import RNPickerSelect from 'react-native-picker-select';
 import  {PickerStates} from './Data';
 import { Label } from '@mui/icons-material';
 import { useNavigation } from "@react-navigation/native";
-<<<<<<< Updated upstream
 import { AuthScreenNavigationType } from "@/navigations/typesOfPages";
-import { Box } from "@/css";
-
-const SignUpScreen = () => {
-    const navigation = useNavigation<AuthScreenNavigationType<"SignUp">> ()
-    const navigateToSignInScreen = () => {
-        navigation.navigate("SignIn")
-    }
-
-
-    return (
-        <Box>
-            <Text> Sign Up Screen </Text>
-            <Button title="Navigate to sign In" onPress={navigateToSignInScreen} />
-
-        </Box>
-=======
-import { AuthScreenNaviagtionType } from "@/navigations/typesOfPages";
 
 const SignUpScreen: React.FC = () => {
 
@@ -75,7 +57,6 @@ const [selectedState, setSelectedState] = useState('');
     <View style={styles.header}>
       <Text style={styles.headerText}>Mosaic</Text>
       <View>
->>>>>>> Stashed changes
 
 
         <Text>Login Info:</Text>

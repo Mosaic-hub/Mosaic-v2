@@ -14,6 +14,11 @@ export type AuthStackParamList = {
     BusinSignIn: undefined
     BusinSignUp: undefined
     Dashboard: undefined
+
+    Settings: undefined
+    CompanyScreen: undefined
+    BusinDash: undefined
+    BusinDashAdmin: undefined
 }
 
 export type RootBottomTabParamList = {
