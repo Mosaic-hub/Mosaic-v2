@@ -1,10 +1,14 @@
 import React, { useState, useEffect} from 'react';
-import { View, Text, TextInput, StyleSheet, TouchableOpacity, SafeAreaView } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, SafeAreaView, Image, ScrollView } from 'react-native';
+import { TextInput, Switch, HelperText } from "react-native-paper";
 import RNPickerSelect from 'react-native-picker-select';
 import  {PickerStates} from './Data';
-import { Label } from '@mui/icons-material';
 import { useNavigation } from "@react-navigation/native";
 import { AuthScreenNavigationType } from "@/navigations/typesOfPages";
+import DarkTheme from '@/css/theme/colorStyles';
+import {style, picker} from './styles';
+
+const logoImage = "https://res.cloudinary.com/dizhcdh0p/image/upload/v1700246870/hrsew7qdm79qqqmga3hj.png";
 
 const SignUpScreen: React.FC = () => {
 
@@ -21,22 +25,7 @@ const SignUpScreen: React.FC = () => {
     lastName: '',
     zip: '',
   });
-
-  const PickerDay = [
-    { label: '1', value: '1' },
-    { label: '2', value: '2' },
-    { label: '3', value: '3' },
-    { label: '4', value: '4' },
-    { label: '5', value: '5' },
-    { label: '6', value: '6' },
-    { label: '7', value: '7' },
-    { label: '8', value: '8' },
-    { label: '9', value: '9' },
-    { label: '10', value: '10' },
-    { label: '11', value: '11' },
-    { label: '12', value: '12' },
-  ];
-
+  
   const handleChange = (name: string, value: string) => {
     setUser({ ...user, [name]: value });
   };
@@ -45,184 +34,107 @@ const SignUpScreen: React.FC = () => {
     console.log('Sign Up button pressed');
   };
 
-const [selectedMonth, setSelectedMonth] = useState('');
-const [selectedYear, setSelectedYear] = useState('');
-const [selectedDay, setSelectedDay] = useState('');
 const [selectedState, setSelectedState] = useState('');
 
-
-
   return (
-    <SafeAreaView>
-    <View style={styles.header}>
-      <Text style={styles.headerText}>Mosaic</Text>
-      <View>
+    <SafeAreaView style={[style.container, DarkTheme.container]}>
 
+      <Image
+          source={{ uri: logoImage, width: 300, height: 100 }}
+      />
 
-        <Text>Login Info:</Text>
+      <ScrollView>
+
+        <Text style={[style.text, DarkTheme.text]}>Login Info:</Text>
+
         <TextInput
-          style={styles.input}
           placeholder="Username"
           onChangeText={(text) => handleChange('username', text)}
+          style={[style.textBox, DarkTheme.textBox]}
+          placeholderTextColor={'#C0C0C0'}
+          textColor='#FFFFFF'
         />
+
         <TextInput
-          style={styles.input}
           placeholder="Password"
-          secureTextEntry
           onChangeText={(text) => handleChange('password', text)}
-        />
-        <TextInput
-          style={styles.input}
-          placeholder="Confirm Password"
+          style={[style.textBox, DarkTheme.textBox]}
           secureTextEntry
-          onChangeText={(text) => handleChange('confirmPassword', text)}
+          placeholderTextColor={'#C0C0C0'}
+          textColor='#FFFFFF'
         />
 
-
-        <Text>Name:</Text>
         <TextInput
-          style={styles.input}
+          placeholder="Confirm Password"
+          onChangeText={(text) => handleChange('confirmPassword', text)}
+          style={[style.textBox, DarkTheme.textBox]}
+          secureTextEntry
+          placeholderTextColor={'#C0C0C0'}
+          textColor='#FFFFFF'
+        />
+
+        <Text style={[style.text, DarkTheme.text]}>Name:</Text>
+
+        <TextInput
           placeholder="First Name"
           onChangeText={(text) => handleChange('firstName', text)}
+          style={[style.textBox, DarkTheme.textBox]}
+          placeholderTextColor={'#C0C0C0'}
+          textColor='#FFFFFF'
         />
+
         <TextInput
-          style={styles.input}
           placeholder="Last Name"
           onChangeText={(text) => handleChange('lastName', text)}
+          style={[style.textBox, DarkTheme.textBox]}
+          placeholderTextColor={'#C0C0C0'}
+          textColor='#FFFFFF'
         />
 
+        <Text style={[style.text, DarkTheme.text]}>Address:</Text>
 
-        <Text>Address:</Text>
         <TextInput
-          style={styles.input}
           placeholder="Street Address"
           onChangeText={(text) => handleChange('address', text)}
-        />
-        <View style={pickerSelectStyles.pickerContainer}>
-          <RNPickerSelect
-            style={{inputIOS: pickerSelectStyles.pickerState,
-              inputAndroid: pickerSelectStyles.pickerState,}}
-            onValueChange={(value) => setSelectedState(value)}
-            items={PickerStates}
-            value={selectedState}
-            placeholder={{ label: 'State', value: '' }}
-          />
-          <TextInput
-          style={styles.ZipInput}
-          placeholder="Zip"
-          onChangeText={(text) => handleChange('zip', text)}
-        />
-        </View>
-        <Text>Phone Number:</Text>
-        <TextInput
-          style={styles.input}
-          placeholder="Phone"
-          onChangeText={(text) => handleChange('phone', text)}
+          style={[style.textBox, DarkTheme.textBox]}
+          placeholderTextColor={'#C0C0C0'}
+          textColor='#FFFFFF'
         />
 
-        <TouchableOpacity style={styles.button} onPress={handleSignUp}>
-          <Text style={styles.buttonText}>Sign Up</Text>
-        </TouchableOpacity>
-      </View>
-    </View>
+        <RNPickerSelect
+          style={picker}
+          onValueChange={(value) => setSelectedState(value)}
+          items={PickerStates}
+          value={selectedState}
+          placeholder={{ label: 'State', value: '' }}
+        />
+
+        <TextInput
+          placeholder="Zip"
+          onChangeText={(text) => handleChange('zip', text)}
+          style={[style.textBox, DarkTheme.textBox]}
+          placeholderTextColor={'#C0C0C0'}
+          textColor='#FFFFFF'
+        />
+
+        <Text style={[style.text, DarkTheme.text]}>Email:</Text>
+
+        <TextInput
+          placeholder="Email"
+          onChangeText={(text) => handleChange('phone', text)}
+          style={[style.textBox, DarkTheme.textBox]}
+          placeholderTextColor={'#C0C0C0'}
+          textColor='#FFFFFF'
+        />
+
+      </ScrollView>
+
+      <TouchableOpacity style={[style.button, DarkTheme.interactable]} onPress={handleSignUp}>
+        <Text style={[style.buttonText, DarkTheme.text]}>Sign Up</Text>
+      </TouchableOpacity>
+      
     </SafeAreaView>
   );
 };
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    paddingHorizontal: 20,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  input: {
-    height: 40,
-    borderColor: 'gray',
-    borderWidth: 1,
-    marginBottom: 10,
-    paddingHorizontal: 10,
-    width: 350,
-    borderRadius: 4,
-  },
-  ZipInput:{
-    height: 40,
-    borderColor: 'gray',
-    borderWidth: 1,
-    marginBottom: 10,
-    paddingHorizontal: 10,
-    width: 175,
-    borderRadius: 4,
-  },
-  button: {
-    alignItems: 'center',
-    backgroundColor: '#007AFF',
-    padding: 10,
-    marginTop: 10,
-    borderRadius: 4,
-  },
-  buttonText: {
-    color: 'white',
-    fontSize: 16,
-  },
-  headerText: {
-    fontSize: 60,
-    paddingBottom: 20,
-  },
-  header:{
-    alignItems: 'center',
-    paddingTop: 20,
-  }
-});
-
-const pickerSelectStyles = StyleSheet.create({
-  pickerContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-  label: {
-    marginRight: 10,
-    fontSize: 16,
-  },
-  pickerMonth: {
-    fontSize: 16,
-    height: 40,
-    width: 150,
-    borderWidth: 1,
-    borderColor: 'gray',
-    borderRadius: 4,
-    paddingHorizontal: 10,
-    marginBottom: 10,
-  },
-  pickerDay: {
-    fontSize: 16,
-    height: 40,
-    width: 75,
-    borderWidth: 1,
-    borderColor: 'gray',
-    borderRadius: 4,
-    paddingHorizontal: 10,
-    marginBottom: 10,
-  },
-  pickerYear: {
-    fontSize: 16,
-    height: 40,
-    width: 125,
-    borderWidth: 1,
-    borderColor: 'gray',
-    borderRadius: 4,
-    paddingHorizontal: 10,
-    marginBottom: 10,
-  },
-  pickerState: {
-    fontSize: 16,
-    height: 40,
-    width: 175,
-    borderWidth: 1,
-    borderColor: 'gray',
-    borderRadius: 4,
-    paddingHorizontal: 10,
-    marginBottom: 10,
-  },
-});
 export default SignUpScreen;

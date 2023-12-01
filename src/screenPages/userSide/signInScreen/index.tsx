@@ -1,32 +1,30 @@
 import React, { useState } from "react";
-import { View, Text, Button, StyleSheet } from "react-native";
+import { View, Text, Image, SafeAreaView, TouchableOpacity } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { AuthScreenNavigationType } from "@/navigations/typesOfPages";
-import SafeAreaWrapper from "@/components/shared/safe-area-wrapper";
-import { Checkbox, TextInput, Switch, HelperText } from "react-native-paper";
+import { TextInput, Switch, HelperText } from "react-native-paper";
+import style from "./styles";
+import DarkTheme from "@/css/theme/colorStyles";
 
+const logoImage = "https://res.cloudinary.com/dizhcdh0p/image/upload/v1700246870/hrsew7qdm79qqqmga3hj.png";
 
 const SignInScreen = () => {
-    const navigation = useNavigation<AuthScreenNavigationType<"SignIn">> ()
-    const navigateToDashboardScreen = () => {
-        navigation.navigate("Dashboard")
-    }
-    const navigateToSignUp = () => {
-        navigation.navigate("SignUp")
-    }
+
+  const navigation = useNavigation<AuthScreenNavigationType<"SignIn">> ()
+  const navigateToDashboardScreen = () => {
+      navigation.navigate("Dashboard")
+  }
+  const navigateToSignUp = () => {
+      navigation.navigate("SignUp")
+  }
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
-  const [rememberMe, setRememberMe] = useState(false);
   const [isEmailValid, setEmailValid] = useState(true);
 
   const toggleShowPassword = () => {
     setShowPassword(!showPassword);
-  }
-
-  const toggleRememberMe = () => {
-    setRememberMe(!rememberMe);
   }
 
   const validateEmail = (text: string) => {
@@ -37,79 +35,55 @@ const SignInScreen = () => {
     setEmail(text);
   }
 
-  const handleLogin = () => {
-    // Implement your login logic here. You can use a library like Firebase, Axios, etc.
-    // Validate the input and authenticate the user.
-
-    // For demonstration purposes, just display the entered email and password.
-    console.log("Email:", email);
-    console.log("Password:", password);
-    console.log("Remember Me:", rememberMe);
-  }
-
   return (
-    <SafeAreaWrapper>
-      <View style={styles.container}>
-        <Text style={styles.title}>Sign In</Text>
+    <SafeAreaView style={[style.container, DarkTheme.container]}>
+        <Image
+          source={{ uri: logoImage, width: 300, height: 100 }}
+        />
+
+        <Text style={[style.text, DarkTheme.text, {fontSize: 24}]}>Sign In</Text>
+
         <TextInput
-          label="Email"
+          placeholder="Email"
           value={email}
           onChangeText={validateEmail}
-          style={styles.input}
+          style={[style.textBox, DarkTheme.textBox]}
+          placeholderTextColor={'#C0C0C0'}
+          textColor='#FFFFFF'
         />
         {!isEmailValid && <HelperText type="error">Invalid email</HelperText>}
+
         <TextInput
-          label="Password"
+          placeholder="Password"
           value={password}
           onChangeText={setPassword}
           secureTextEntry={!showPassword}
-          style={styles.input}
+          style={[style.textBox, DarkTheme.textBox]}
+          placeholderTextColor={'#C0C0C0'}
+          textColor='#FFFFFF'
         />
-        <View style={styles.checkboxContainer}>
-          <Checkbox.Android
-            status={rememberMe ? "checked" : "unchecked"}
-            onPress={toggleRememberMe}
-          />
-          <Text>Remember Me</Text>
-        </View>
-        <View style={styles.checkboxContainer}>
+
+        <View style={style.showPassword}>
           <Switch
             value={showPassword}
             onValueChange={toggleShowPassword}
+            trackColor={{ false: '#767577', true: '#EB9349' }}
+            style={{marginRight: 5}}
           />
-          <Text>Show Password</Text>
+
+          <Text style={[DarkTheme.text]}>Show Password</Text>
         </View>
-        <Button title="Login" onPress={navigateToDashboardScreen} />
-        <Text style={styles.signUpText}>Don't have an account?</Text>
-        <Button title="Navigate to sign up" onPress={navigateToSignUp} />
-      </View>
-    </SafeAreaWrapper>
+
+        <TouchableOpacity onPress={navigateToDashboardScreen} style={[style.button, DarkTheme.interactable]}>
+          <Text style={[style.buttonText, DarkTheme.text]}>Login</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity onPress={navigateToSignUp} style={[style.button, DarkTheme.interactable]}>
+          <Text style={[style.buttonText, DarkTheme.text]}>Sign Up</Text>
+        </TouchableOpacity>
+
+      </SafeAreaView>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
-    paddingHorizontal: 20,
-  },
-  title: {
-    fontSize: 24,
-    marginBottom: 20,
-  },
-  input: {
-    width: "100%",
-    marginBottom: 10,
-  },
-  checkboxContainer: {
-    flexDirection: "row",
-    alignItems: "center",
-    marginBottom: 10,
-  },
-  signUpText: {
-    marginTop: 10,
-  },
-});
 
 export default SignInScreen
