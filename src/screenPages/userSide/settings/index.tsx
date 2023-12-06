@@ -1,9 +1,9 @@
 import React, {useState, useEffect} from "react";
 import { Box, Text } from "@/css";
-import SafeAreaWrapper from "@/components/shared/safe-area-wrapper";
 import { AuthScreenNavigationType } from "@/navigations/typesOfPages";
 import { useNavigation } from "@react-navigation/native";
-import {Button, TouchableOpacity, StyleSheet, View, TextInput, Dimensions} from "react-native";
+import {Button, StyleSheet, Dimensions, SafeAreaView} from "react-native";
+import DarkTheme from "@/css/theme/colorStyles";
 import Modal from 'react-native-modal';
 import { FontAwesome } from "@expo/vector-icons";
 
@@ -14,9 +14,9 @@ const Settings = () => {
     }
 
     return (
-        <SafeAreaWrapper>
+        <SafeAreaView style={[DarkTheme.container, {flex: 1}]}>
             <Button title="Log Out" onPress={navigateToSignInScreen}/>
-        </SafeAreaWrapper>
+        </SafeAreaView>
 
 
     )

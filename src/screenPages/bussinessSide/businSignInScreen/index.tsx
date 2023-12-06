@@ -10,17 +10,23 @@ const logoImage = "https://res.cloudinary.com/dizhcdh0p/image/upload/v1700246870
 
 const BusinSignInScreen = () => {
 
+  let isAdmin: boolean = true
+
   const navigation = useNavigation<AuthScreenNavigationType<"SignIn">> ()
   const navigateToDashboardScreen = () => {
       navigation.navigate("BusinDash")
+  }
+  const navigateToDashboardScreenAdmin = () => {
+    navigation.navigate("BusinDashAdmin")
   }
   const navigateToSignUp = () => {
       navigation.navigate("BusinSignUp")
   }
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
-
   const [username, setUsername] = useState('');
+  const [bussinessID, setBussinessID] = useState('');
+
 
   const handleUsernameChange = (text: React.SetStateAction<string>) => {
     setUsername(text);
@@ -28,6 +34,15 @@ const BusinSignInScreen = () => {
 
   const toggleShowPassword = () => {
     setShowPassword(!showPassword);
+  }
+
+  const handleIsAdmin = () => {
+    if(isAdmin){
+      navigateToDashboardScreenAdmin();
+    }
+    else{
+      navigateToDashboardScreen();
+    }
   }
 
   return (
@@ -56,6 +71,14 @@ const BusinSignInScreen = () => {
           placeholderTextColor={'#C0C0C0'}
           textColor='#FFFFFF'
         />
+        <TextInput
+          placeholder="Bussiness ID"
+          value={bussinessID}
+          onChangeText={setBussinessID}
+          style={[style.textBox, DarkTheme.textBox]}
+          placeholderTextColor={'#C0C0C0'}
+          textColor='#FFFFFF'
+        />
 
         <View style={style.showPassword}>
           <Switch
@@ -68,7 +91,7 @@ const BusinSignInScreen = () => {
           <Text style={[DarkTheme.text]}>Show Password</Text>
         </View>
 
-        <TouchableOpacity onPress={navigateToDashboardScreen} style={[style.button, DarkTheme.interactable]}>
+        <TouchableOpacity onPress={handleIsAdmin} style={[style.button, DarkTheme.interactable]}>
           <Text style={[style.buttonText, DarkTheme.text]}>Login</Text>
         </TouchableOpacity>
 
@@ -79,30 +102,5 @@ const BusinSignInScreen = () => {
       </SafeAreaView>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
-    paddingHorizontal: 20,
-  },
-  title: {
-    fontSize: 24,
-    marginBottom: 20,
-  },
-  input: {
-    width: "100%",
-    marginBottom: 10,
-  },
-  checkboxContainer: {
-    flexDirection: "row",
-    alignItems: "center",
-    marginBottom: 10,
-  },
-  signUpText: {
-    marginTop: 10,
-  },
-});
 
 export default BusinSignInScreen;

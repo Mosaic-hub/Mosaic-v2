@@ -1,15 +1,23 @@
 import React, { useState, useEffect } from "react";
-import {StyleSheet, View, Text, TextInput, Button, TouchableOpacity, Dimensions, SafeAreaView, ScrollView} from "react-native";
+import {StyleSheet, View, Text, Button, TouchableOpacity, Dimensions, SafeAreaView, ScrollView, Image} from "react-native";
 import { FontAwesome } from "@expo/vector-icons";
+import { TextInput, Switch, HelperText } from "react-native-paper";
 import Modal from "react-native-modal";
-import SafeAreaWrapper from "@/components/shared/safe-area-wrapper";
 import Posts from "./data"
 import { SearchResult } from "./data";
 import { useNavigation } from "@react-navigation/native";
 import { AuthScreenNavigationType } from "@/navigations/typesOfPages";
 import Popup from "../popup/popup"
+import DarkTheme from "@/css/theme/colorStyles";
+import { style } from "./styles"
+
+const logoImage = "https://res.cloudinary.com/dizhcdh0p/image/upload/v1700246870/hrsew7qdm79qqqmga3hj.png";
 
 const Dashboard = () => {
+  const navigation = useNavigation<AuthScreenNavigationType<"Dashboard">> ()
+  const navigateToSettings = () => {
+      navigation.navigate("Settings")
+  }
   const [isPopupVisible, setPopupVisible] = useState(false);
 
   const openPopup = () => {
@@ -23,7 +31,9 @@ const Dashboard = () => {
   const [isModalVisible, setModalVisible] = useState(false);
 
   const toggleModal = () => {
-    setModalVisible(!isModalVisible);
+    if(!isModalVisible){
+      setModalVisible(!isModalVisible);
+    }
   };
 
   const [searchTerm, setSearchTerm] = useState("");
@@ -57,143 +67,90 @@ const Dashboard = () => {
     setSearchTerm("");
   };
 
-  const clearResults = () => {
-    setResults([] as never[]);
-    setSearched(false);
-    setShowAllFlag(false);
-    setSearchTerm("");
-  };
-
   useEffect(() => {
     if (searchTerm === "") {
       showAll();
     }
   }, [searchTerm, showAllFlag]);
 
-  const containerStyle = searched || showAllFlag ? styles2.containerWithResults : styles.container;
+  const containerStyle = searched || showAllFlag ? style.containerWithResults : style.container;
 
   return (
-    <SafeAreaWrapper>
-    <View style={styles.container}>
-      <View style={styles.searchBarContainer}>
+    <SafeAreaView style={[style.container, DarkTheme.container]}>
+      <View style={style.headerView}>
+        <Image
+          source={{ uri: logoImage, width: 175, height: 45 }}
+        />
+        <TouchableOpacity style={style.settingsButton} onPress={navigateToSettings}>
+          <FontAwesome name="cog" size={24} color="white" />
+        </TouchableOpacity>
+      </View>
+      <View style={style.placeholder}></View>
+      
+    <View style={style.container}>
+      <View style={style.searchBarContainer}>
         <TextInput
-          style={styles.input}
+          style={[style.textBox, DarkTheme.textBox]}
           placeholder="Search for..."
           value={searchTerm}
           onChangeText={setSearchTerm}
+          placeholderTextColor={'#C0C0C0'}
+          textColor='#FFFFFF'
         />
         <Button title="Search" onPress={fetchResults} />
       </View>
       <Modal
         isVisible={isModalVisible}
         backdropOpacity={0.5}
-        style={styles.modal}
+        style={style.modal}
       >
-        <SafeAreaView style={styles.modalContent}>
+        <View style={[style.modalContainer, DarkTheme.container]}>
           <SafeAreaView style={containerStyle}>
-            <View style={styles.searchBarContainer}>
+            <View style={style.searchBarContainer}>
               <TextInput
-                style={styles.input}
+                style={[style.textBox, DarkTheme.textBox]}
                 placeholder="Search for..."
                 value={searchTerm}
                 onChangeText={setSearchTerm}
+                placeholderTextColor={'#C0C0C0'}
+                textColor='#FFFFFF'
               />
               <Button title="Search" onPress={fetchResults} />
             </View>
-            <Text style={styles2.title}>Mosaic Search</Text>
+            <Text style={[style.text, DarkTheme.text, {fontSize: 20}]}>Mosaic Search</Text>
             {searched && (
-              <ScrollView style={{flex: 1}} contentContainerStyle={styles2.resultsContainer}>
+              <ScrollView style={{flex: 1}} contentContainerStyle={style.resultsContainer}>
                 {results.length > 0 ? (
                   results.map((result, index) => (
                     <TouchableOpacity
                       onPress={() => openPopup()}
-                      style={styles.resultTile}
+                      style={[style.modalResults, DarkTheme.interactable]}
                       key={index}>
-                      <Text style={styles.resultTitle}>{result.title}</Text>
-                      <Text style={styles.resultCompany}>{result.company}</Text>
-                      <Text style={styles.resultPrice}>{result.price}</Text>
+                      <Text style={[style.text, DarkTheme.text]}>{result.title}</Text>
+                      <Text style={[style.text, DarkTheme.text]}>{result.company}</Text>
+                      <Text style={[style.text, DarkTheme.text]}>{result.price}</Text>
                     </TouchableOpacity>
                   ))
                   
                 ) : (
-                  <Text style={styles2.noResults}>No results found</Text>
+                  <Text style={[style.text, {color: "red"}]}>No results found</Text>
                 )}
                 <Popup isVisible={isPopupVisible} onClose={closePopup} />
               </ScrollView>
             )}
-            {searched || showAllFlag ? (
-              <Button title="Clear" onPress={clearResults} />
-            ) : null}
           </SafeAreaView>
           <TouchableOpacity
-            onPress={toggleModal}
-            style={styles2.closeButton}
+            onPress={() => setModalVisible(false)}
+            style={[style.button, {backgroundColor: '#EB9349'}]}
           >
             <Text>Close</Text>
           </TouchableOpacity>
-        </SafeAreaView>
+        </View>
       </Modal>
     </View>
-    </SafeAreaWrapper>
+    </SafeAreaView>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'flex-end',
-    alignItems:'center',
-  },
-  searchBarContainer: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-    width: "100%",
-    padding: 10,
-  },
-  input: {
-    flex: 1,
-    height: 40,
-    borderColor: "gray",
-    borderWidth: 1,
-    padding: 10,
-  },
-  modal: {
-    justifyContent: 'flex-end',
-    margin: 0,
-  },
-  modalContent: {
-    backgroundColor: 'white',
-    height: Dimensions.get('window').height - 100,
-    borderTopLeftRadius: 10,
-    borderTopRightRadius: 10,
-  },
-  closeButton: {
-    alignItems: 'center',
-    backgroundColor: 'red',
-    padding: 10,
-    borderBottomLeftRadius: 10,
-    borderBottomRightRadius: 10,
-  },
-  resultTile: {
-    width: "95%", // Adjust the width as needed
-    margin: 5,
-    padding: 10,
-    backgroundColor: "lightgray",
-    borderRadius: 5,
-  },
-  resultTitle: {
-    fontSize: 16,
-    fontWeight: "bold",
-  },
-  resultCompany: {
-    fontSize: 14,
-  },
-  resultPrice: {
-    fontSize: 14,
-    textAlign: "right",
-  },
-});
 
 const styles2 = StyleSheet.create({
   container: {
@@ -238,17 +195,6 @@ const styles2 = StyleSheet.create({
     justifyContent: "center",
     width: "100%",
     paddingHorizontal: 10,
-  },
-  settingsButton: {
-    position: "absolute",
-    top: 10,
-    right: 10,
-    width: 40,
-    height: 40,
-    borderRadius: 20,
-    backgroundColor: "blue",
-    alignItems: "center",
-    justifyContent: "center",
   },
   closeButton: {
     alignItems: "center",

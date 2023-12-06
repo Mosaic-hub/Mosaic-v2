@@ -1,272 +1,105 @@
 import React, { useState } from "react";
-import { View, Text, Button, StyleSheet, ScrollView, TouchableOpacity } from "react-native";
+import {Text, TouchableOpacity, SafeAreaView, Image, ScrollView } from 'react-native';
+import { TextInput } from "react-native-paper";
 import { useNavigation } from "@react-navigation/native";
 import { AuthScreenNavigationType } from "@/navigations/typesOfPages";
-import SafeAreaWrapper from "@/components/shared/safe-area-wrapper";
-import { TextInput, HelperText } from "react-native-paper";
-import RNPickerSelect from 'react-native-picker-select';
-import { Feather } from '@expo/vector-icons';
+import DarkTheme from '@/css/theme/colorStyles';
+import {style} from './styles';
 
-const usStates = [
-  "Alabama",
-  "Alaska",
-  "Arizona",
-  "Arkansas",
-  "California",
-  "Colorado",
-  "Connecticut",
-  "Delaware",
-  "Florida",
-  "Georgia",
-  "Hawaii",
-  "Idaho",
-  "Illinois",
-  "Indiana",
-  "Iowa",
-  "Kansas",
-  "Kentucky",
-  "Louisiana",
-  "Maine",
-  "Maryland",
-  "Massachusetts",
-  "Michigan",
-  "Minnesota",
-  "Mississippi",
-  "Missouri",
-  "Montana",
-  "Nebraska",
-  "Nevada",
-  "New Hampshire",
-  "New Jersey",
-  "New Mexico",
-  "New York",
-  "North Carolina",
-  "North Dakota",
-  "Ohio",
-  "Oklahoma",
-  "Oregon",
-  "Pennsylvania",
-  "Rhode Island",
-  "South Carolina",
-  "South Dakota",
-  "Tennessee",
-  "Texas",
-  "Utah",
-  "Vermont",
-  "Virginia",
-  "Washington",
-  "West Virginia",
-  "Wisconsin",
-  "Wyoming",
-];
+const logoImage = "https://res.cloudinary.com/dizhcdh0p/image/upload/v1700246870/hrsew7qdm79qqqmga3hj.png";
 
-const BusinSignUpScreen = () => {
-  const navigation = useNavigation<AuthScreenNavigationType<"BusinSignUp">>();
+const BusinSignUpScreen: React.FC = () => {
 
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
-  const [phone, setPhone] = useState("");
-  const [streetAddress, setStreetAddress] = useState("");
-  const [city, setCity] = useState("");
-  const [selectedState, setSelectedState] = useState("Alabama");
-  const [zipCode, setZipCode] = useState("");
-  const [country, setCountry] = useState("United States");
-  const [showPassword, setShowPassword] = useState(false);
-  const [isEmailValid, setEmailValid] = useState(true);
-  const [birthDate, setBirthDate] = useState(new Date());
-  const [isDatePickerVisible, setDatePickerVisible] = useState(false);
-
-  const toggleShowPassword = () => {
-    setShowPassword(!showPassword);
-  }
-
-  const validateEmail = (text: string) => {
-    const isValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(text);
-    setEmailValid(isValid);
-    setEmail(text);
-  }
-
-  const handleDatePicked = (date: Date) => {
-    setBirthDate(date);
-    setDatePickerVisible(false);
-  }
-
-  const showDatePicker = () => {
-    setDatePickerVisible(true);
-  }
-
-  const hideDatePicker = () => {
-    setDatePickerVisible(false);
-  }
+  const [user, setUser] = useState({
+    username: '',
+    password: '',
+    confirmPassword: '',
+    email: '',
+    bussinessName: '',
+    bussinessID: '',
+  });
+  
+  const handleChange = (name: string, value: string) => {
+    setUser({ ...user, [name]: value });
+  };
 
   const handleSignUp = () => {
-    console.log("First Name:", firstName);
-    console.log("Last Name:", lastName);
-    console.log("Email:", email);
-    console.log("Password:", password);
-    console.log("Confirm Password:", confirmPassword);
-    console.log("Phone:", phone);
-    console.log("Street Address:", streetAddress);
-    console.log("City:", city);
-    console.log("State:", selectedState);
-    console.log("Zip Code:", zipCode);
-    console.log("Country:", country);
-    console.log("Birth Date:", birthDate);
-  }
+    console.log('Sign Up button pressed');
+  };
 
   return (
-    <SafeAreaWrapper>
-      <ScrollView contentContainerStyle={styles.container}>
-        <Text style={styles.title}>Business Sign Up</Text>
+    <SafeAreaView style={[style.container, DarkTheme.container]}>
+
+      <Image
+          source={{ uri: logoImage, width: 300, height: 100 }}
+      />
+      <Text style={[style.text, DarkTheme.text, {fontSize: 24}]}>Bussiness Sign Up</Text>
+
+      <ScrollView>
+
+        <Text style={[style.text, DarkTheme.text]}>Admin Login Info:</Text>
+
         <TextInput
-          label="First Name"
-          value={firstName}
-          onChangeText={setFirstName}
-          style={styles.input}
+          placeholder="Username"
+          onChangeText={(text) => handleChange('username', text)}
+          style={[style.textBox, DarkTheme.textBox]}
+          placeholderTextColor={'#C0C0C0'}
+          textColor='#FFFFFF'
         />
+
         <TextInput
-          label="Last Name"
-          value={lastName}
-          onChangeText={setLastName}
-          style={styles.input}
+          placeholder="Password"
+          onChangeText={(text) => handleChange('password', text)}
+          style={[style.textBox, DarkTheme.textBox]}
+          secureTextEntry
+          placeholderTextColor={'#C0C0C0'}
+          textColor='#FFFFFF'
         />
+
         <TextInput
-          label="Email"
-          value={email}
-          onChangeText={validateEmail}
-          style={styles.input}
+          placeholder="Confirm Password"
+          onChangeText={(text) => handleChange('confirmPassword', text)}
+          style={[style.textBox, DarkTheme.textBox]}
+          secureTextEntry
+          placeholderTextColor={'#C0C0C0'}
+          textColor='#FFFFFF'
         />
-        {!isEmailValid && <HelperText type="error">Invalid email</HelperText>}
-        <View style={styles.passwordContainer}>
-          <TextInput
-            label="Password"
-            value={password}
-            onChangeText={setPassword}
-            secureTextEntry={!showPassword}
-            style={styles.passwordInput}
-          />
-          <TouchableOpacity onPress={toggleShowPassword} style={styles.showPasswordIcon}>
-            <Feather
-              name={showPassword ? 'eye' : 'eye-off'}
-              size={20}
-              color="black"
-            />
-          </TouchableOpacity>
-        </View>
+
+        <Text style={[style.text, DarkTheme.text]}>Bussiness Info:</Text>
+
         <TextInput
-          label="Confirm Password"
-          value={confirmPassword}
-          onChangeText={setConfirmPassword}
-          secureTextEntry={!showPassword}
-          style={styles.input}
-        />
-        <TextInput
-          label="Phone"
-          value={phone}
-          onChangeText={setPhone}
-          style={styles.input}
+          placeholder="Bussiness Name"
+          onChangeText={(text) => handleChange('bussinessName', text)}
+          style={[style.textBox, DarkTheme.textBox]}
+          placeholderTextColor={'#C0C0C0'}
+          textColor='#FFFFFF'
         />
         <TextInput
-          label="Street Address"
-          value={streetAddress}
-          onChangeText={setStreetAddress}
-          style={styles.input}
+          placeholder="Bussiness ID"
+          onChangeText={(text) => handleChange('bussinessID', text)}
+          style={[style.textBox, DarkTheme.textBox]}
+          placeholderTextColor={'#C0C0C0'}
+          textColor='#FFFFFF'
         />
+
+        <Text style={[style.text, DarkTheme.text]}>Bussiness contact Info:</Text>
+
         <TextInput
-          label="City"
-          value={city}
-          onChangeText={setCity}
-          style={styles.input}
+          placeholder="Email"
+          onChangeText={(text) => handleChange('email', text)}
+          style={[style.textBox, DarkTheme.textBox]}
+          placeholderTextColor={'#C0C0C0'}
+          textColor='#FFFFFF'
         />
-        <RNPickerSelect
-          onValueChange={(value) => setSelectedState(value)}
-          items={usStates.map((state) => ({
-            label: state,
-            value: state,
-          }))}
-          value={selectedState}
-          style={pickerSelectStyles}
-        />
-        <TextInput
-          label="Zip Code"
-          value={zipCode}
-          onChangeText={setZipCode}
-          style={styles.input}
-        />
-        <TextInput
-          label="Country"
-          value={country}
-          onChangeText={setCountry}
-          style={styles.input}
-        />
-        <Button title="Sign Up" onPress={handleSignUp} color="#007bff" />
+
       </ScrollView>
-    </SafeAreaWrapper>
+
+      <TouchableOpacity style={[style.button, DarkTheme.interactable]} onPress={handleSignUp}>
+        <Text style={[style.buttonText, DarkTheme.text]}>Sign Up</Text>
+      </TouchableOpacity>
+      
+    </SafeAreaView>
   );
-}
-
-const styles = StyleSheet.create({
-  container: {
-    alignItems: "center",
-    paddingHorizontal: 20,
-  },
-  title: {
-    fontSize: 24,
-    marginBottom: 20,
-  },
-  input: {
-    width: "100%",
-    marginBottom: 10,
-  },
-  passwordContainer: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
-  },
-  passwordInput: {
-    flex: 1,
-    marginBottom: 10,
-  },
-  showPasswordIcon: {
-    padding: 10,
-  },
-  birthDateContainer: {
-    flexDirection: "row",
-    alignItems: "center",
-    marginBottom: 10,
-  },
-  birthDateInput: {
-    flex: 2,
-  },
-  birthYearInput: {
-    flex: 1,
-  },
-});
-
-const pickerSelectStyles = StyleSheet.create({
-  inputIOS: {
-    fontSize: 16,
-    paddingVertical: 12,
-    paddingHorizontal: 10,
-    borderWidth: 1,
-    borderColor: 'gray',
-    borderRadius: 4,
-    color: 'black',
-    paddingRight: 30,
-  },
-  inputAndroid: {
-    fontSize: 16,
-    paddingHorizontal: 10,
-    paddingVertical: 8,
-    borderWidth: 0.5,
-    borderColor: 'purple',
-    borderRadius: 8,
-    color: 'black',
-    paddingRight: 30,
-  },
-});
+};
 
 export default BusinSignUpScreen;

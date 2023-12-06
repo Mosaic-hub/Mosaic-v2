@@ -16,14 +16,9 @@ const SignUpScreen: React.FC = () => {
     username: '',
     password: '',
     confirmPassword: '',
-    monthDay: '',
     firstName: '',
-    address: '',
-    state: '',
-    phone: '',
-    birthdayYear: '',
+    email: '',
     lastName: '',
-    zip: '',
   });
   
   const handleChange = (name: string, value: string) => {
@@ -91,37 +86,11 @@ const [selectedState, setSelectedState] = useState('');
           textColor='#FFFFFF'
         />
 
-        <Text style={[style.text, DarkTheme.text]}>Address:</Text>
-
-        <TextInput
-          placeholder="Street Address"
-          onChangeText={(text) => handleChange('address', text)}
-          style={[style.textBox, DarkTheme.textBox]}
-          placeholderTextColor={'#C0C0C0'}
-          textColor='#FFFFFF'
-        />
-
-        <RNPickerSelect
-          style={picker}
-          onValueChange={(value) => setSelectedState(value)}
-          items={PickerStates}
-          value={selectedState}
-          placeholder={{ label: 'State', value: '' }}
-        />
-
-        <TextInput
-          placeholder="Zip"
-          onChangeText={(text) => handleChange('zip', text)}
-          style={[style.textBox, DarkTheme.textBox]}
-          placeholderTextColor={'#C0C0C0'}
-          textColor='#FFFFFF'
-        />
-
         <Text style={[style.text, DarkTheme.text]}>Email:</Text>
 
         <TextInput
           placeholder="Email"
-          onChangeText={(text) => handleChange('phone', text)}
+          onChangeText={(text) => handleChange('email', text)}
           style={[style.textBox, DarkTheme.textBox]}
           placeholderTextColor={'#C0C0C0'}
           textColor='#FFFFFF'

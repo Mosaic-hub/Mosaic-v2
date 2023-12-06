@@ -16,6 +16,9 @@ const DarkTheme = StyleSheet.create({
     textBox:{
         backgroundColor: '#42474F',
     },
+    headerView:{
+        backgroundColor: '#191B1F'
+    }
 })
 
 export default DarkTheme;

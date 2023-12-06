@@ -11,7 +11,6 @@ import SettingsScreen from "@/screenPages/userSide/settings"
 import CompanyScreen from "@/screenPages/userSide/companyScreen"
 import BusinDash from "@/screenPages/bussinessSide/dashboard"
 import BusinDashAdmin from "@/screenPages/bussinessSide/dashboardAdmin"
-import businSettings from "@/screenPages/bussinessSide/settings";
 
 
 const Stack = createNativeStackNavigator<AuthStackParamList>()
@@ -75,12 +74,6 @@ const AuthStackNavigator  = () => {
                     headerShown: false,
                 }} 
             component={BusinDashAdmin} />
-
-            <Stack.Screen name =  "BusinSettings"
-                options={{
-                    headerShown: false,
-                }} 
-            component={businSettings} />
         
         
         </Stack.Navigator>
