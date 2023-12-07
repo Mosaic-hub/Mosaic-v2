@@ -10,7 +10,7 @@ const logoImage = "https://res.cloudinary.com/dizhcdh0p/image/upload/v1700246870
 
 const BusinSignInScreen = () => {
 
-  let isAdmin: boolean = true
+  let isAdmin: boolean = false
 
   const navigation = useNavigation<AuthScreenNavigationType<"SignIn">> ()
   const navigateToDashboardScreen = () => {
